@@ -1,6 +1,15 @@
+'''
+
+webserver.py
+
+Author: Curtis Kauer
+
+'''
+
 import socket
 import argparse
 
+# parse commandline
 argument_parser = argparse.ArgumentParser()
 argument_parser.add_argument("--port_number", "-p", type = int, required = True, help = "the port to listen on")
 
@@ -8,11 +17,13 @@ def main():
     
     port = argument_parser.parse_args()
     
+    # sets up socket to listen for connections
     current_socket = socket.socket()
     network = ('', port.port_number)
     current_socket.bind(network)
     current_socket.listen()
     
+    # infinite loop to listen for connections
     while True:
         
         new_connection = current_socket.accept()
